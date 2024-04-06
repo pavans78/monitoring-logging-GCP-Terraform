@@ -1,0 +1,94 @@
+{
+    "displayName": "GKE Cluster Monitoring",
+    "gridLayout": {
+      "columns": "2",
+      "widgets": [
+        {
+          "title": "Node - Total, Request, Allocatable CPU cores",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "minAlignmentPeriod": "60s",
+                "plotType": "LINE",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "crossSeriesReducer": "REDUCE_SUM",
+                      "perSeriesAligner": "ALIGN_MEAN"
+                    },
+                    "filter": "metric.type=\"kubernetes.io/container/cpu/request_cores\" resource.type=\"k8s_container\"",
+                    "secondaryAggregation": {}
+                  },
+                  "unitOverride": "{cpu}"
+                }
+              },
+              {
+                "minAlignmentPeriod": "60s",
+                "plotType": "LINE",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "crossSeriesReducer": "REDUCE_SUM",
+                      "perSeriesAligner": "ALIGN_MEAN"
+                    },
+                    "filter": "metric.type=\"kubernetes.io/node/cpu/allocatable_cores\" resource.type=\"k8s_node\"",
+                    "secondaryAggregation": {}
+                  },
+                  "unitOverride": "{cpu}"
+                }
+              },
+              {
+                "minAlignmentPeriod": "60s",
+                "plotType": "LINE",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "crossSeriesReducer": "REDUCE_SUM",
+                      "perSeriesAligner": "ALIGN_MEAN"
+                    },
+                    "filter": "metric.type=\"kubernetes.io/node/cpu/total_cores\" resource.type=\"k8s_node\"",
+                    "secondaryAggregation": {}
+                  },
+                  "unitOverride": "{cpu}"
+                }
+              }
+            ],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "scale": "LINEAR"
+            }
+          }
+        },
+        {
+            "title": "Container - Total CPU Cores limit, Cores request",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      },
+                      "filter": "metric.type=\"kubernetes.io/container/cpu/limit_cores\" resource.type=\"k8s_container\"",
+                      "secondaryAggregation": {}
+                    },
+                    "unitOverride": "{cpu}"
+                }
+              }
+            ]
+           }   
+        }
+      ]
+    }
+
+}
+
